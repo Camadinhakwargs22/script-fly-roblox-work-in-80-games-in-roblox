@@ -1,8 +1,19 @@
+-- Função para encontrar Players dinamicamente
+local function findPlayersService()
+    for _, service in ipairs(game:GetChildren()) do
+        if service:IsA("Players") then
+            return service
+        end
+    end
+    error("Players não encontrado no jogo.")
+end
+
 -- Variáveis principais
-local flying = false
+local playersService = findPlayersService() -- Usar a função para encontrar Players
+local player = playersService.LocalPlayer
 local speed = 50  -- Velocidade inicial
 local smoothness = 0.2
-local player = game.Players.LocalPlayer
+local flying = false
 local character = player.Character or player.CharacterAdded:Wait()
 local rootPart = character:WaitForChild("HumanoidRootPart")
 local camera = workspace.CurrentCamera
